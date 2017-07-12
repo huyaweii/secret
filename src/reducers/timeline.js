@@ -1,8 +1,8 @@
 // const reducer = () => {
 //   const state = {
 //     name: 'hyw'
-//   } 
-//   return state 
+//   }
+//   return state
 // }
 const ininState = {
   results: [
