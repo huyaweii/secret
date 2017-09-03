@@ -78,5 +78,6 @@ module.exports = {
   components: resolveApp('src/components'),
   modules: resolveApp('src/modules'),
   reducers: resolveApp('src/reducers'),
-  data: resolveApp('src/data')
+  data: resolveApp('src/data'),
+  utils: resolveApp('src/utils')
 }

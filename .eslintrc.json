@@ -13,12 +13,14 @@
     },
     "sourceType": "module"
   },
-  "plugins": ["react", "babel"],
+  "plugins": ["react", "babel", "jsx-a11y"],
   "rules": {
     "indent": [0, "tab"],
     "linebreak-style": [2, "unix"],
     "quotes": [2, "single"],
     "semi": [2, "never"],
-    "import/no-webpack-loader-syntax": 0
+    "import/no-webpack-loader-syntax": 0,
+    "jsx-a11y/rule-name": 0,
+    "jsx-a11y/img-has-alt": 0
   }
 }

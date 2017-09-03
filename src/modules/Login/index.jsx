@@ -2,10 +2,18 @@ import React, { Component } from 'react'
 import { Input, Button } from 'antd'
 import CIcon from 'components/Icon'
 import style from './style.less'
-// import APIS from 'data'
+import APIS from '../../data'
+import { message } from 'antd'
 export default class Login extends Component {
+  state = {}
   login = () => {
-    window.location.href = '/home'
+    APIS.login('hyw', '123456').then(res => {
+      if (res.status === 200) {
+        window.location.href = '/home'
+      } else {
+        message.warning('账号不存在')
+      }
+    })
   }
   render() {
     return (

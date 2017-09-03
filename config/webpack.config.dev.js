@@ -1,23 +1,23 @@
-'use strict';
+'use strict'
 
-var autoprefixer = require('autoprefixer');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-var WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
-var getClientEnvironment = require('./env');
-var paths = require('./paths');
+var autoprefixer = require('autoprefixer')
+var webpack = require('webpack')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
+var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin')
+var WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin')
+var getClientEnvironment = require('./env')
+var paths = require('./paths')
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
-var publicPath = '/';
+var publicPath = '/'
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing slash as %PUBLIC_PATH%/xyz looks better than %PUBLIC_PATH%xyz.
-var publicUrl = '';
+var publicUrl = ''
 // Get environment variables to inject into our app.
-var env = getClientEnvironment(publicUrl);
+var env = getClientEnvironment(publicUrl)
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -77,11 +77,11 @@ module.exports = {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
-      'components': paths.components,
-      'modules': paths.modules
+      components: paths.components,
+      modules: paths.modules
     }
   },
-  
+
   module: {
     // First, run the linter.
     // It's important to do this before Babel processes the JS.
@@ -128,9 +128,7 @@ module.exports = {
         include: paths.appSrc,
         loader: 'babel',
         query: {
-          plugins: [
-            ['import', [{ libraryName: 'antd', style: true }]]
-          ],
+          plugins: [['import', [{ libraryName: 'antd', style: true }]]],
           // This is a feature of `babel-loader` for webpack (not Babel itself).
           // It enables caching results in ./node_modules/.cache/babel-loader/
           // directory for faster rebuilds.
@@ -159,7 +157,7 @@ module.exports = {
         query: {
           name: 'static/media/[name].[hash:8].[ext]'
         }
-      },     
+      },
       {
         test: /\.less$/,
         exclude: [/antd/],
@@ -172,17 +170,14 @@ module.exports = {
       },
       {
         test: /routes\/([^\/]+\/?[^\/]+).js$/,
-        use: [
-          'bundle-loader?lazy',
-          'ts-loader'
-        ]
-       }
+        use: ['bundle-loader?lazy', 'ts-loader']
+      }
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "url" loader exclusion list.
     ]
   },
   // We use PostCSS for autoprefixing only.
-  postcss: function () {
+  postcss: function() {
     return [
       autoprefixer({
         browsers: [
@@ -192,7 +187,7 @@ module.exports = {
           'not ie < 9' // React doesn't support IE8 anyway
         ]
       })
-    ];
+    ]
   },
   plugins: [
     // Makes some environment variables available in index.html.
@@ -227,4 +222,4 @@ module.exports = {
     net: 'empty',
     tls: 'empty'
   }
-};
+}

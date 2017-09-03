@@ -1,6 +1,7 @@
 import { login } from './login'
-
+import { getNoteList } from './note'
 const APIS = {
-  login
+  login,
+  getNoteList
 }
 export default APIS
