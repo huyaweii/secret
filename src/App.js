@@ -10,14 +10,8 @@ import RootReducer from './reducers'
 import loadHome from 'bundle-loader?lazy!./modules/Home'
 import loadLogin from 'bundle-loader?lazy!./modules/Login'
 const history = createHistory()
-const Home = props =>
-  <Bundle load={loadHome}>
-    {Component => <Component />}
-  </Bundle>
-const Login = props =>
-  <Bundle load={loadLogin}>
-    {Component => <Component />}
-  </Bundle>
+const Home = props => <Bundle load={loadHome}>{Component => <Component />}</Bundle>
+const Login = props => <Bundle load={loadLogin}>{Component => <Component />}</Bundle>
 
 class App extends Component {
   render() {
@@ -25,7 +19,7 @@ class App extends Component {
       <Provider store={RootReducer}>
         <ConnectedRouter history={history}>
           <div className="App">
-            <Route path="/" component={Home} />
+            <Route path="/Home" component={Home} />
             <Route path="/login" component={Login} />
           </div>
         </ConnectedRouter>

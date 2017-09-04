@@ -18,7 +18,7 @@ export default class Login extends Component {
   render() {
     return (
       <div className={style.loginWrap}>
-        <div>私秘</div>
+        <div>咪GO</div>
         <Input placeholder="Enter your userName" prefix={<CIcon type="user" />} className={style.input} />
         <Input placeholder="Enter your userName" prefix={<CIcon type="key" />} className={style.input} />
         <Button type="primary" width={200} className={style.login} onClick={this.login}>

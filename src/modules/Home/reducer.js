@@ -3,7 +3,7 @@ import APIS from '../../data'
 
 // const client = ApiClient.instance
 const initState = {
-  list: []
+  list: {}
 }
 export const home = (state = initState, action) => {
   switch (action.type) {
@@ -18,8 +18,8 @@ export const home = (state = initState, action) => {
   }
 }
 
-export const getNoteList = () => (dispatch, getState) => {
-  APIS.getNoteList().then(res =>
+export const getList = () => (dispatch, getState) => {
+  APIS.getList().then(res =>
     dispatch({
       type: 'get',
       res

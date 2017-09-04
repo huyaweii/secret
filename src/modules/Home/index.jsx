@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import style from './style.less'
-import { Menu, Icon } from 'antd'
+import { Menu, Icon, Card } from 'antd'
 // import {connect} from 'react-redux'
-import { getNoteList } from './reducer.js'
+import { getList } from './reducer.js'
+import View from 'components/View/index.jsx'
+import _ from 'lodash'
 const SubMenu = Menu.SubMenu
 
 // const patch = () => (
@@ -18,70 +20,63 @@ const SubMenu = Menu.SubMenu
 //   }
 // )
 
-@connect(({ home }) => ({ home }), { getNoteList })
+@connect(({ home }) => ({ home }), { getList })
 export default class Home extends Component {
   state = {
     noteList: []
   }
   componentWillMount() {
-    this.props.getNoteList(res => this.setState({ noteList: res.data }))
+    this.props.getList(res => this.setState({ noteList: res.data }))
   }
   getNoteList = () => {
-    this.props.getNoteList(res => this.setState({ noteList: res.data }))
+    this.props.getList(res => this.setState({ noteList: res.data }))
   }
-  pub = () => {
-    // this.props.patch()
-    // fetch("http://127.0.0.1:3000/article",
-    // {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body:
-    //     JSON.stringify({
-    //       title: 'lakers',
-    //       content: 'kobe is mvp',
-    //       user_id: 1
-    //     })
-    // }).then(
-    //   res => {
-    //     res.json().then(v => console.log(v))
-    //   }
-    // )
-  }
+  pub = () => {}
   render() {
     return (
       <div className={style.home}>
-        <div className={style.leftNav}>
-          <Menu mode="inline" className={style.ul}>
-            <Menu.Item key="1">我的时光笔记</Menu.Item>
-            <SubMenu
-              key="sub1"
-              title={
-                <span>
-                  <Icon type="mail" />
-                  <span>新闻列表</span>
-                </span>
-              }
-            >
-              <Menu.Item key="4">Option 1</Menu.Item>
-              <Menu.Item key="5">Option 2</Menu.Item>
-            </SubMenu>
-          </Menu>
-        </div>
-        <div className={style.conContainer}>
-          {this.props.home.list.map(l =>
-            <div style={{ display: 'flex', textAlign: 'left', flexDirection: 'column' }}>
-              <p>
-                {l.title}
-              </p>
-              <p>
-                {l.content}
-              </p>
-            </div>
-          )}
+        <div style={{ margin: '0 auto' }}>
+          {_.map(this.props.home.list, item => (
+            <CardItem
+              username={item['created_by'].name}
+              title={item.title}
+              url={item['img_url']}
+              avatar={item['created_by'].avatar}
+            />
+          ))}
         </div>
       </div>
+    )
+  }
+}
+
+class CardItem extends Component {
+  state = {}
+  render() {
+    const { username, title, url, avatar } = this.props
+    return (
+      <View className={style.card} style={{ width: '500px', position: 'relative', fontSize: '14px' }}>
+        <img src={avatar} style={{ width: '70px', height: '70px', position: 'absolute', left: '-100px', top: '0px' }} />
+        <View flex row justify="flex-start" style={{ color: '#888' }}>
+          发表自: {username}
+        </View>
+        <View row style={{ margin: '15px 0px' }}>
+          <img src={url} style={{ width: '200px' }} />
+          <p style={{ marginLeft: '20px', color: '#444' }}>{title}</p>
+        </View>
+        <View row style={{ color: '#aaa', fontSize: '12px' }}>
+          <View flex={1} row style={{ width: 0 }}>
+            <Icon type="icon-iconziti23" />
+            <i className="iconfont icon-iconziti23" />
+            <span>萌</span>
+            <span style={{ marginLeft: '10px' }}>可爱</span>
+          </View>
+          <View flex={1} row style={{ width: 0 }} justify={'flex-end'}>
+            <span className="m-r-20">评论</span>
+            <span style={{ marginLeft: '10px' }}>赞</span>
+          </View>
+        </View>
+      </View>
     )
   }
 }
