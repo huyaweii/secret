@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
+import './style/index.less'
 
 import { Route } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'

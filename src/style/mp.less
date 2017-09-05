@@ -1,3 +1,6 @@
+body {
+  color: #f00 !important;
+}
 .pull-right {
   float: right;
 }
@@ -121,4 +124,12 @@
 
 .block {
   display: block !important;
+}
+
+.generate-fontSize(48);
+.generate-fontSize(@n, @i: 11) when(@i =< @n) {
+  .f@{i} {
+    font-size: @i * 1px;
+  }
+  .generate-fontSize(@n, (@i+1));
 }

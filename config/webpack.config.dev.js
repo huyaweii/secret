@@ -160,12 +160,12 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        exclude: [/antd/],
+        exclude: [/antd/, paths.style],
         loader: 'style!css?modules!postcss!less?{modifyVars:{"@primary-color":"#1DA57A"}}'
       },
       {
         test: /\.less$/,
-        include: [/antd/],
+        include: [/antd/, paths.style],
         loader: 'style!css!postcss!less?{modifyVars:{"@primary-color":"#1DA57A"}}'
       },
       {

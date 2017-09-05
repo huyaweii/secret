@@ -55,25 +55,27 @@ class CardItem extends Component {
   render() {
     const { username, title, url, avatar } = this.props
     return (
-      <View className={style.card} style={{ width: '500px', position: 'relative', fontSize: '14px' }}>
-        <img src={avatar} style={{ width: '70px', height: '70px', position: 'absolute', left: '-100px', top: '0px' }} />
-        <View flex row justify="flex-start" style={{ color: '#888' }}>
+      <View className={style.card + ' f14'}>
+        <img src={avatar} className={style.avatar} />
+        <View flex row justify="flex-start" className="f15" style={{ color: '#888' }}>
           发表自: {username}
         </View>
-        <View row style={{ margin: '15px 0px' }}>
+        <View row className="m-y-15">
           <img src={url} style={{ width: '200px' }} />
-          <p style={{ marginLeft: '20px', color: '#444' }}>{title}</p>
+          <p className="m-l-20" style={{ color: '#444' }}>
+            {title}
+          </p>
         </View>
-        <View row style={{ color: '#aaa', fontSize: '12px' }}>
+        <View row style={{ color: '#aaa' }} className="f12">
           <View flex={1} row style={{ width: 0 }}>
             <Icon type="icon-iconziti23" />
             <i className="iconfont icon-iconziti23" />
             <span>萌</span>
-            <span style={{ marginLeft: '10px' }}>可爱</span>
+            <span className="m-l-10">可爱</span>
           </View>
           <View flex={1} row style={{ width: 0 }} justify={'flex-end'}>
             <span className="m-r-20">评论</span>
-            <span style={{ marginLeft: '10px' }}>赞</span>
+            <span className="m-l-10">赞</span>
           </View>
         </View>
       </View>
