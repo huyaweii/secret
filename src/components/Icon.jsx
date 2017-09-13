@@ -6,11 +6,11 @@ import { Icon } from 'antd'
 **/
 export default class CIcon extends React.Component {
   render() {
-    const { type } = this.props
+    const { type, ...rest } = this.props
     let customType = type
-    if (type.indexOf('i-') === 0) {
-      customType = 'iconfont ' + type
+    if (type.indexOf('icon-') === 0) {
+      return <i className={'iconfont ' + type} {...rest} />
     }
-    return <Icon type={customType} />
+    return <Icon type={customType} {...rest} />
   }
 }

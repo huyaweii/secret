@@ -2,9 +2,7 @@
   "name": "secret",
   "version": "0.1.0",
   "private": true,
-  "theme": {
-    "primary-color": "#f00"
-  },
+  "theme": {},
   "dependencies": {
     "antd": "^2.8.1",
     "axios": "^0.16.2",
@@ -15,9 +13,11 @@
     "babel-preset-stage-2": "^6.24.1",
     "classnames": "^2.2.5",
     "connected-react-router": "^4.2.1",
+    "crypto": "^1.0.1",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
+    "qiniu4js": "^1.0.13",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.4",
@@ -65,6 +65,7 @@
     "object-assign": "4.1.1",
     "postcss-loader": "1.2.2",
     "promise": "7.1.1",
+    "qiniu.js": "^0.1.2",
     "react-dev-utils": "^0.5.2",
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
