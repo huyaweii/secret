@@ -5,9 +5,8 @@ import { Input, Button } from 'antd'
 import CIcon from 'components/Icon'
 import View from 'components/View'
 import style from './style.less'
-import { message } from 'antd'
 import { createAccount, login } from './reducer.js'
-@connect(({}) => ({}), { createAccount, login })
+@connect(({ user }) => ({ user }), { createAccount, login })
 export default class Login extends Component {
   state = {
     showLogin: true,
@@ -57,7 +56,7 @@ export default class Login extends Component {
               className={style.input}
               onChange={this.handleChange.bind(this, 'telephone')}
             />
-            <Input  
+            <Input
               placeholder="输入你的密码"
               prefix={<CIcon type="key" />}
               className={style.input}

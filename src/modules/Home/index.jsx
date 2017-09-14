@@ -7,7 +7,8 @@ import Icon from 'components/Icon'
 import { getList, createComment } from './reducer.js'
 import View from 'components/View'
 import Avatar from 'components/Avatar'
-import { UploaderBuilder } from 'qiniu4js'
+import { upload } from 'utils/upload'
+import { QI_NIU_URL } from 'config/constant'
 
 import _ from 'lodash'
 
@@ -22,23 +23,6 @@ import _ from 'lodash'
 //     patch
 //   }
 // )
-let uploader = new UploaderBuilder()
-  .debug(false) //开启debug，默认false
-  .domain('http://img.yourdomain.com') //默认为http://upload.qiniu.com
-  .retry(0) //设置重传次数，默认0，不重传
-  .size(1024 * 1024) //分片大小，最多为4MB,单位为字节,默认1MB
-  .chunk(true) //是否分块上传，默认true，当chunk=true并且文件大于4MB才会进行分块上传
-  .auto(true) //选中文件后立即上传，默认true
-  .multiple(true) //是否支持多文件选中，默认true
-  .accept(['.gif', '.png', 'video/*']) //过滤文件，默认无，详细配置见http://www.w3schools.com/tags/att_input_accept.asp
-  .tokenShare(true) //在一次上传队列中，是否分享token,如果为false每上传一个文件都需要请求一次Token，默认true
-  .tokenFunc(function(setToken, task) {
-    //token获取函数，token获取完成后，必须调用`setToken(token);`不然上传任务不会执行。
-    console.log('hah')
-  })
-document.getElementById('dnd').click = function() {
-  uploader.chooseFile()
-}
 
 @connect(({ home }) => ({ home }), { getList, createComment })
 export default class Home extends Component {
@@ -59,7 +43,6 @@ export default class Home extends Component {
           <View flex row className="m-t-20 pointer">
             <Icon type="icon-mingzi" />
           </View>
-
           {_.map(this.props.home.list, item => (
             <CardItem
               username={item['created_by'].name}
@@ -155,15 +138,22 @@ class Comment extends Component {
 }
 class CreatePost extends Component {
   state = {
-    title: ''
+    title: '',
+    imgUrl: ''
   }
   handleChange = input => {
     this.setState({ title: input.target.valuse })
   }
-  handleUploadImg = file => {
-    console.log(file)
+  handleUploadImg = target => {
+    if (target.file.status === 'done') {
+      upload(target.file.originFileObj).then(res => {
+        this.setState({ imgUrl: QI_NIU_URL + res.data.key })
+      })
+    }
   }
   render() {
+    const { imgUrl } = this.state
+    console.log(imgUrl)
     return (
       <div className="m-t-20">
         <Input type="text" onChange={this.handleChange} />
@@ -174,13 +164,13 @@ class CreatePost extends Component {
           action="//jsonplaceholder.typicode.com/posts/"
           onChange={this.handleUploadImg}
         >
-          {'' ? (
-            <img src={''} alt="" className={style.avatar} />
+          {imgUrl ? (
+            <img src={imgUrl} alt="" className={style.avatar} />
           ) : (
             <Icon type="plus" className={style.avatarUploaderTrigger} id="dnd" />
           )}
         </Upload>
-        <Button type="primary" className="m-t-20">
+        <Button type="primary" className="m-t-20" onClick={this.handleUploadImg}>
           确定
         </Button>
       </div>

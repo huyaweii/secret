@@ -80,5 +80,6 @@ module.exports = {
   reducers: resolveApp('src/reducers'),
   data: resolveApp('src/data'),
   utils: resolveApp('src/utils'),
+  config: resolveApp('src/config'),
   style: resolveApp('src/style')
 }

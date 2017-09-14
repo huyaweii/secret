@@ -1,8 +1,6 @@
 import axios from 'axios'
 import store from '../reducers/index.js'
 const methods = ['get', 'post', 'put', 'delete', 'patch']
-
-console.log(store, '??')
 export default class Client {
   constructor() {
     methods.map(
