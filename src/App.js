@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 import './style/index.less'
 
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 import { Provider } from 'react-redux'
@@ -14,6 +14,24 @@ const history = createHistory()
 const Home = props => <Bundle load={loadHome}>{Component => <Component />}</Bundle>
 const Login = props => <Bundle load={loadLogin}>{Component => <Component />}</Bundle>
 
+// 验证是否登录
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      localStorage.getItem('token') ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: '/login',
+            state: { from: props.location }
+          }}
+        />
+      )}
+  />
+)
+
 class App extends Component {
   render() {
     return (
@@ -22,6 +40,7 @@ class App extends Component {
           <div className="App">
             <Route path="/Home" component={Home} />
             <Route path="/login" component={Login} />
+            <PrivateRoute path="/" component={Home} />
           </div>
         </ConnectedRouter>
       </Provider>

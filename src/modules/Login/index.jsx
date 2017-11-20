@@ -61,6 +61,7 @@ export default class Login extends Component {
               prefix={<CIcon type="key" />}
               className={style.input}
               onChange={this.handleChange.bind(this, 'password')}
+              type="password"
             />
             <Button type="primary" width={200} className={style.login} onClick={this.handleLogin}>
               登录

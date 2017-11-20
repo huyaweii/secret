@@ -35,8 +35,7 @@ export const createAccount = (telephone, password) => {
 export const login = (telephone, password) => (dispatch, getState) => {
   return client.post(APIS.login, { data: { telephone, password } }, res => {
     return {
-      type: 'LOGIN',
-      user: res.data.user
+      type: 'LOGIN'
     }
   })
 }
